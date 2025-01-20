@@ -1,7 +1,7 @@
-package service;
+package ru.test.service;
 
-import dto.PersonAndDogSaveInformationDto;
-import dto.ResultSaveInformationDto;
+import ru.test.dto.PersonAndDogSaveInformationDto;
+import ru.test.dto.ResultSaveInformationDto;
 
 public interface PersonAndDogService {
 

@@ -1,16 +1,18 @@
-package service;
+package ru.test.service;
 
-import dto.DogDto;
-import dto.PersonAndDogSaveInformationDto;
-import dto.ResultSaveInformationDto;
-import model.Dog;
-import model.Person;
-import repository.DogRepository;
-import repository.PersonRepository;
+import org.springframework.stereotype.Service;
+import ru.test.dto.DogDto;
+import ru.test.dto.PersonAndDogSaveInformationDto;
+import ru.test.dto.ResultSaveInformationDto;
+import ru.test.model.Dog;
+import ru.test.model.Person;
+import ru.test.repository.DogRepository;
+import ru.test.repository.PersonRepository;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class PersonAndDogServiceImpl implements PersonAndDogService {
 
     private final PersonVerificationService personVerificationService;
@@ -39,8 +41,8 @@ public class PersonAndDogServiceImpl implements PersonAndDogService {
         List<Long> dogsIds = dto.getDogs() == null ? Collections.emptyList()
                 : dto.getDogs().stream().map(this::createDog).collect(Collectors.toList());
 
-//        if (dto.getDogs() != null && !dto.getDogs().isEmpty()) {
-//            for (DogDto dtoDog : dto.getDogs()) {
+//        if (ru.test.dto.getDogs() != null && !ru.test.dto.getDogs().isEmpty()) {
+//            for (DogDto dtoDog : ru.test.dto.getDogs()) {
 //                var newDog = new Dog(dtoDog.getName());
 //                var idDog = dogRepository.create(newDog);
 //                dogsIds.add(idDog);

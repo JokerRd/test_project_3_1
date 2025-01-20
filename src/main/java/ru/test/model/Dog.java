@@ -1,4 +1,4 @@
-package model;
+package ru.test.model;
 
 public class Dog {
 

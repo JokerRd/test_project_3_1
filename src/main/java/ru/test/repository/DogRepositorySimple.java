@@ -1,10 +1,12 @@
-package repository;
+package ru.test.repository;
 
-import model.Dog;
+import org.springframework.stereotype.Repository;
+import ru.test.model.Dog;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DogRepositorySimple implements DogRepository{
+@Repository
+public class DogRepositorySimple implements DogRepository {
 
     private Map<Long, Dog> dogs = new HashMap<>();
     private int counterId = 0;

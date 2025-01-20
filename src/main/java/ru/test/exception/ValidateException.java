@@ -1,4 +1,4 @@
-package exception;
+package ru.test.exception;
 
 public class ValidateException extends RuntimeException {
 

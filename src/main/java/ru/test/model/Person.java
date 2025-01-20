@@ -1,6 +1,6 @@
-package model;
+package ru.test.model;
 
-import exception.ValidateException;
+import ru.test.exception.ValidateException;
 
 import java.util.List;
 

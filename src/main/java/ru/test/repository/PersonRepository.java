@@ -1,6 +1,6 @@
-package repository;
+package ru.test.repository;
 
-import model.Person;
+import ru.test.model.Person;
 
 public interface PersonRepository {
 

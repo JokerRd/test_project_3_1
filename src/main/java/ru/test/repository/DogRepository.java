@@ -1,6 +1,6 @@
-package repository;
+package ru.test.repository;
 
-import model.Dog;
+import ru.test.model.Dog;
 
 public interface DogRepository {
 

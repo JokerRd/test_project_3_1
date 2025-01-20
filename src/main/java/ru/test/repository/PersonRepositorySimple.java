@@ -1,10 +1,12 @@
-package repository;
+package ru.test.repository;
 
-import model.Person;
+import org.springframework.stereotype.Repository;
+import ru.test.model.Person;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class PersonRepositorySimple implements PersonRepository {
 
     private Map<Long, Person> persons = new HashMap<>();
