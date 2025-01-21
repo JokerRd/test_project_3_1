@@ -1,5 +1,8 @@
 package ru.test.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import ru.test.dto.DogDto;
 import ru.test.dto.PersonAndDogSaveInformationDto;
@@ -13,14 +16,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Primary
 public class PersonAndDogServiceImpl implements PersonAndDogService {
 
     private final PersonVerificationService personVerificationService;
+
     private final DogRepository dogRepository;
+
     private final PersonRepository personRepository;
 
     public PersonAndDogServiceImpl(PersonVerificationService personVerificationService,
-                                   DogRepository dogRepository,
+                                   @Qualifier(value = "dogRepositorySimple") DogRepository dogRepository,
                                    PersonRepository personRepository) {
         this.personVerificationService = personVerificationService;
         this.dogRepository = dogRepository;
