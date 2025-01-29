@@ -25,4 +25,15 @@ public class PersonRepositorySimple implements PersonRepository {
         return person.getId();
     }
 
+    @Override
+    public void update(Person person) {
+        persons.put(person.getId(), person);
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        var person = persons.remove(id);
+        return person != null;
+    }
+
 }

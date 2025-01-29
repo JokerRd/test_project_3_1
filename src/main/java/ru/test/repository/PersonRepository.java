@@ -7,4 +7,8 @@ public interface PersonRepository {
     Person get(Long id);
 
     Long create(Person person);
+
+    void update(Person person);
+
+    boolean delete(Long id);
 }

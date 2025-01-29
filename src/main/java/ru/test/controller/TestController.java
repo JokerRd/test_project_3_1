@@ -1,8 +1,10 @@
 package ru.test.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.test.config.ApplicationProperties;
 
 import java.util.List;
 
@@ -10,14 +12,20 @@ import java.util.List;
 @RestController
 public class TestController {
 
+    private final ApplicationProperties applicationProperties;
+
+    public TestController(ApplicationProperties applicationProperties) {
+        this.applicationProperties = applicationProperties;
+    }
+
     @GetMapping("/test")
     public Info test() {
         return new Info("test", 1, List.of("a", "b", "c"), new SubInfo(1));
     }
 
-    @PostMapping("/test")
+    @GetMapping("/settings")
     public String test1() {
-        return "test1";
+        return applicationProperties.getTest();
     }
 
     @GetMapping("/with-path-param/{id}")

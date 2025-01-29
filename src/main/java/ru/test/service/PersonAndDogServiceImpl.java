@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-import ru.test.dto.DogDto;
-import ru.test.dto.PersonAndDogSaveInformationDto;
-import ru.test.dto.ResultSaveInformationDto;
+import ru.test.dto.*;
 import ru.test.model.Dog;
 import ru.test.model.Person;
 import ru.test.repository.DogRepository;
@@ -59,6 +57,32 @@ public class PersonAndDogServiceImpl implements PersonAndDogService {
         var idPerson = personRepository.create(person);
 
         return new ResultSaveInformationDto(idPerson, true, "Все ок");
+    }
+
+    @Override
+    public PersonInformationDto getPersonById(long id) {
+        var person = personRepository.get(id);
+        if (person == null) {
+            return null;
+        }
+        var dogs = person.getIdDogs().stream()
+                .map(dogRepository::get)
+                .map(dog -> new DogDto(dog.getName()))
+                .collect(Collectors.toList());
+        return new PersonInformationDto(person.getId(), person.getName(), person.getAge(), person.getCountProblem(), dogs);
+    }
+
+    @Override
+    public ResultSaveInformationDto updatePersonInformation(UpdatePersonInformation dto) {
+        var person = personRepository.get(dto.getId());
+        person.setName(dto.getName());
+        personRepository.update(person);
+        return new ResultSaveInformationDto(person.getId(), true, "Ок");
+    }
+
+    @Override
+    public boolean deletePersonById(long id) {
+        return personRepository.delete(id);
     }
 
     private Long createDog(DogDto dogDto) {
