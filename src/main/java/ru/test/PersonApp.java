@@ -25,16 +25,12 @@ public class PersonApp {
         var service2 = context.getBean(Service2.class);
 
         service1.doIt();
-
-
         service2.doIt();
-
 
         var wrongDto = new PersonAndDogSaveInformationDto("Иван", 25, List.of(
                 new DogDto("Бобик"), new DogDto("Шарик")
         ));
         var result = personAndDogService.saveInformationAboutPersonAndDogs(wrongDto);
-
 
         System.out.println(result.getMessage());
     }
