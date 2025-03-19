@@ -1,6 +1,0 @@
-server:
-  port: 9000
-
-application:
-  id: 1
-  test: ${TEST:5}

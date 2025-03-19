@@ -1,29 +1,27 @@
 package ru.test.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.validation.constraints.*;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
 public class PersonAndDogSaveInformationDto {
 
+    @NotNull(message = "Поле name не может быть null")
+    @NotEmpty(message = "Поле name не может быть пустым")
     private String name;
+
+    @Min(value = 0)
+    @Max(value = 100)
     private int age;
-    List<DogDto> dogs;
 
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public List<DogDto> getDogs() {
-        return dogs;
-    }
+    @Size(min = 1)
+    private List<DogDto> dogs;
 
 
-    public PersonAndDogSaveInformationDto(String name, int age, List<DogDto> dogs) {
-        this.name = name;
-        this.age = age;
-        this.dogs = dogs;
-    }
 }

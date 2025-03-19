@@ -1,10 +1,12 @@
 package ru.test.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import ru.test.dto.*;
+import ru.test.mapper.TestMapper;
 import ru.test.model.Dog;
 import ru.test.model.Person;
 import ru.test.repository.DogRepository;
@@ -15,22 +17,16 @@ import java.util.stream.Collectors;
 
 @Service
 @Primary
+@RequiredArgsConstructor
 public class PersonAndDogServiceImpl implements PersonAndDogService {
 
     private final PersonVerificationService personVerificationService;
 
-    private final DogRepository dogRepository;
+    @Qualifier(value = "dogRepositorySimple") private final DogRepository dogRepository;
 
     private final PersonRepository personRepository;
 
-    public PersonAndDogServiceImpl(PersonVerificationService personVerificationService,
-                                   @Qualifier(value = "dogRepositorySimple") DogRepository dogRepository,
-                                   PersonRepository personRepository) {
-        this.personVerificationService = personVerificationService;
-        this.dogRepository = dogRepository;
-        this.personRepository = personRepository;
-    }
-
+    private final TestMapper testMapper;
 
     @Override
     public ResultSaveInformationDto saveInformationAboutPersonAndDogs(PersonAndDogSaveInformationDto dto) {
@@ -53,7 +49,7 @@ public class PersonAndDogServiceImpl implements PersonAndDogService {
 //            }
 //        }
 
-        var person = new Person(dto.getName(), dto.getAge(), dogsIds);
+        var person = testMapper.fromDto(dto, dogsIds);
         var idPerson = personRepository.create(person);
 
         return new ResultSaveInformationDto(idPerson, true, "Все ок");
@@ -69,7 +65,7 @@ public class PersonAndDogServiceImpl implements PersonAndDogService {
                 .map(dogRepository::get)
                 .map(dog -> new DogDto(dog.getName()))
                 .collect(Collectors.toList());
-        return new PersonInformationDto(person.getId(), person.getName(), person.getAge(), person.getCountProblem(), dogs);
+        return testMapper.fromPerson(person, dogs);
     }
 
     @Override

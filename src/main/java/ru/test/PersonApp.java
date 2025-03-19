@@ -1,9 +1,15 @@
 package ru.test;
 
+import ru.test.config.AppConfiguration;
 import ru.test.dto.DogDto;
 import ru.test.dto.PersonAndDogSaveInformationDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import ru.test.dto.TestMapperDto;
+import ru.test.mapper.TestMapper;
+import ru.test.mapper.TestMapperImpl;
+import ru.test.model.Dog;
+import ru.test.model.TestMapperEntity;
 import ru.test.service.PersonAndDogService;
 import ru.test.service.PersonAndDogServiceImpl;
 
@@ -14,6 +20,17 @@ public class PersonApp {
 
     public static void main(String[] args) {
         var context = SpringApplication.run(PersonApp.class, args);
+        var config = context.getBean(AppConfiguration.class);
+        var testMapperDto = new TestMapperDto(
+                1, "name", 2, "43", "dfsfsd", "dfsfd",
+                "dsfsdf", "sdfsdfd",
+                "2433242","dsdfds", "sdfsf", "dsfd", "dfsf"
+        );
+
+        TestMapper testMapper = new TestMapperImpl();
+        var testMapperEntity = testMapper.fromDto(testMapperDto, 1);
+        testMapper.fromDto2("testMapperDto", testMapperEntity);
+        System.out.println(testMapperEntity);
 //        var personAndDogService = context.getBean(PersonAndDogService.class);
 //
 //
